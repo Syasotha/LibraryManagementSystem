@@ -7,7 +7,10 @@ package com.sgc.controller;
 
 import com.sgc.model.MainClassification;
 import com.sgc.model.MainClassificationDAO;
+import com.sgc.model.ScViewSearchDao;
+import com.sgc.model.SubClassification;
 import com.sgc.model.deleteDao;
+import com.sgc.model.subViewDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -67,19 +70,18 @@ public class DeleteSubController extends HttpServlet {
             throws ServletException, IOException {
         //processRequest(request, response);
            String sid = request.getParameter("sid");
-         List<MainClassification> main;
-         
+                  
            try {
          deleteDao.deleteSubClasi(sid);
-        main=MainClassificationDAO.getMainClassific();
-        request.setAttribute("main", main);
+        List<SubClassification> subcal = subViewDao.getsubTableDe();
+        request.setAttribute("subCalsi", subcal);
         
      } catch (ClassNotFoundException ex) {
          Logger.getLogger(deleteBookController.class.getName()).log(Level.SEVERE, null, ex);
      } catch (SQLException ex) {
          Logger.getLogger(deleteBookController.class.getName()).log(Level.SEVERE, null, ex);
      }
-       request.getRequestDispatcher("./pages/subClassiSearchUpdate.jsp").forward(request, response);          
+       request.getRequestDispatcher("subClasiUpdatePageViewController").forward(request, response);          
     
     }
 
@@ -94,7 +96,18 @@ public class DeleteSubController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+         try {
+            //processRequest(request, response);
+            String search_key = request.getParameter("Search_option");
+            String search_value = request.getParameter("Search_value");
+            
+            List<SubClassification> subcal =ScViewSearchDao.getScDetails(search_key, search_value);
+            request.setAttribute("subCalsi", subcal);
+        } catch (SQLException ex) {
+            Logger.getLogger(ScViewSearchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.getRequestDispatcher("./pages/subClassiSearchUpdate.jsp").forward(request, response);
     }
 
     /**

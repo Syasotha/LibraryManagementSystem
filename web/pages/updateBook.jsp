@@ -83,15 +83,15 @@
                                         </div>                                            
                                          <div class="form-group">
                                             <label>Select Main classification </label>
-                                            <select class="form-control" name="mainClassificationId" id="main_classification" onChange="changeSubClassification(this.form);">
+                                            <select class="form-control" name="mainClassificationId" id="main_classification" onChange="changeSubClassification(this.form);" >
                                                   <c:forEach var="item" items="${mainClassifications}">
                                                   <option value="${item.id}" <c:if test="${item.id eq mainClassificationId}" >Selected="true"</c:if>>${item.name}</option>
                                                 </c:forEach>
                                             </select>
-                                        </div>                                            
+                                        </div>                                           
                                        <div class="form-group">
                                             <label>Select Sub classification </label>
-                                            <select class="form-control" name="sID" id="sub_classification">
+                                            <select class="form-control" name="sID" id="sub_classification" value="${book.getSubClassiID()}">
                                                 <c:forEach var="sub" items="${subClassifications}">
                                                     <option value="${sub.id}"> ${sub.name}</option>
                                                 </c:forEach>

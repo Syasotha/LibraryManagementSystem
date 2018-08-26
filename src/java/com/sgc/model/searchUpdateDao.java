@@ -54,7 +54,7 @@ public class searchUpdateDao {
                 + " b.NoOfPages as noOfPages FROM lms.book_details b "
                 + "LEFT JOIN lms.Sub_classification s on b.subClasiID=s.id"
                 + " LEFT JOIN main_classification m on m.id=s.main_classification_id"
-                + " WHERE b.bookID = \"" + bookId + "\";";
+                + " WHERE b.bookID = '" + bookId + "';";
         
         ResultSet rs= statement.executeQuery(query);  
         

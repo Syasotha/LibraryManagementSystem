@@ -8,6 +8,7 @@ package com.sgc.controller;
 import com.sgc.model.BookDAO;
 import com.sgc.model.MainClassification;
 import com.sgc.model.MainClassificationDAO;
+import com.sgc.model.McSearchViewDao;
 import com.sgc.model.deleteDao;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -69,6 +70,8 @@ public class deleteMainController extends HttpServlet {
         try {
             // processRequest(request, response);
             String mid = request.getParameter("mid");
+             List<MainClassification> maincl = MainClassificationDAO.getMainClassific();
+            request.setAttribute("main", maincl);
             
             
             deleteDao.deleteMainClasi(mid);
@@ -93,7 +96,17 @@ public class deleteMainController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+         try {
+            // processRequest(request, response);
+            String search_key = request.getParameter("Search_option");
+            String search_value = request.getParameter("Search_value");
+            List<MainClassification> maincl =McSearchViewDao.getMcDetails(search_key, search_value);
+            request.setAttribute("main", maincl);
+        } catch (SQLException ex) {
+            Logger.getLogger(McViewSearchController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.getRequestDispatcher("./pages/mainClasiSearchUpdate.jsp").forward(request, response);
     }
 
     /**

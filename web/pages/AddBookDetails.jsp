@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <script>
             window.onload = function () {
                 for (y = 2000; y <= 2500; y++) {

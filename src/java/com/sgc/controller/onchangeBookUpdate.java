@@ -108,7 +108,8 @@ public class onchangeBookUpdate extends HttpServlet {
             book.setSubClassificationName(subcc);
             book.setISBNno(isbnno);
             book.setNoOfPages(nop);
-            
+            book.setLastprintedyear(lpy);
+            book.setYearOfPublishing(yearop);
            
             request.setAttribute("book", book);
             //request.setAttribute("bookID", request.getParameter("bookID"));
